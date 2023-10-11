@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import RenderTag from './RenderTag';
 
 const topQuestions = [
   {
@@ -22,6 +23,34 @@ const topQuestions = [
   {
     _id: 5,
     title: 'How to create a new project?',
+  },
+];
+
+const popularTags = [
+  {
+    _id: 1,
+    name: 'react',
+    totalQuestions: 5,
+  },
+  {
+    _id: 2,
+    name: 'javascript',
+    totalQuestions: 10,
+  },
+  {
+    _id: 3,
+    name: 'next',
+    totalQuestions: 15,
+  },
+  {
+    _id: 4,
+    name: 'redux',
+    totalQuestions: 5,
+  },
+  {
+    _id: 5,
+    name: 'vue',
+    totalQuestions: 5,
   },
 ];
 
@@ -52,7 +81,20 @@ const RightSidebar = () => {
         </div>
       </div>
 
-      <div className='mt-16'></div>
+      <div className='mt-16'>
+        <h3 className='h3-bold text-dark200_light900'>Popular Tags</h3>
+        <div className='mt-7 flex flex-col gap-4'>
+          {popularTags.map((tag) => (
+            <RenderTag
+              key={tag._id}
+              _id={tag._id}
+              name={tag.name}
+              totalQuestions={tag.totalQuestions}
+              showCount
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
