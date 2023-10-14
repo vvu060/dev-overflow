@@ -1,9 +1,65 @@
 import HomeFilters from '@/components/home/HomeFilters';
 import Filter from '@/components/shared/Filter';
+import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
 import Link from 'next/link';
+
+const questions = [
+  {
+    _id: 1,
+    title: 'How to use the new React Query?',
+    tags: [
+      { _id: 1, name: 'react' },
+      { _id: 2, name: 'javascript' },
+    ],
+    author: 'John Doe',
+    upvotes: 10,
+    views: 20,
+    answers: 5,
+    createdAt: '2021-09-01T12:00:00.000Z',
+  },
+  {
+    _id: 2,
+    title: 'How to center a div?',
+    tags: [
+      { _id: 1, name: 'html' },
+      { _id: 2, name: 'javascript' },
+    ],
+    author: 'John Doe',
+    upvotes: 20,
+    views: 40,
+    answers: 5,
+    createdAt: '2021-09-01T12:00:00.000Z',
+  },
+  {
+    _id: 3,
+    title: 'How to use nextjs?',
+    tags: [
+      { _id: 1, name: 'next' },
+      { _id: 2, name: 'javascript' },
+    ],
+    author: 'Jane Doe',
+    upvotes: 10,
+    views: 20,
+    answers: 34,
+    createdAt: '2021-09-01T12:00:00.000Z',
+  },
+  {
+    _id: 1,
+    title: 'How to use Server components',
+    tags: [
+      { _id: 1, name: 'react' },
+      { _id: 2, name: 'nextjs' },
+    ],
+    author: 'John Doe',
+    upvotes: 10,
+    views: 20,
+    answers: 5,
+    createdAt: '2021-09-01T12:00:00.000Z',
+  },
+];
 
 export default function Home() {
   return (
@@ -33,6 +89,14 @@ export default function Home() {
       </div>
 
       <HomeFilters />
+
+      <div className='mt-10 flex w-full flex-col gap-6'>
+        {questions.length > 0 ? (
+          questions.map((question) => 'No Question')
+        ) : (
+          <NoResult />
+        )}
+      </div>
     </>
   );
 }
