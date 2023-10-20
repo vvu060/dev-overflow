@@ -30,3 +30,13 @@ export const getTimestamp = (createdAt: Date): string => {
     return `${years} ${years === 1 ? 'year' : 'years'} ago`;
   }
 };
+
+export const formatAndDivideNumber = (num: number): string => {
+  if (Math.abs(num) >= 1000000) {
+    return (num / 1000000).toFixed(2) + 'M';
+  } else if (Math.abs(num) >= 1000) {
+    return (num / 1000).toFixed(2) + 'K';
+  } else {
+    return num.toString();
+  }
+};
