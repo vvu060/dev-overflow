@@ -1,9 +1,65 @@
+import QuestionCard from '@/components/cards/QuestionCard';
 import HomeFilters from '@/components/home/HomeFilters';
 import Filter from '@/components/shared/Filter';
+import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
 import Link from 'next/link';
+
+const questions = [
+  {
+    _id: '1',
+    title: 'How to use Redux with React?',
+    tags: [
+      { _id: '1', name: 'react' },
+      { _id: '2', name: 'redux' },
+    ],
+    author: {
+      _id: '2',
+      name: 'Alice Smith',
+      picture: 'url_to_picture',
+    },
+    upvotes: 15000000,
+    views: 30000,
+    answers: [],
+    createdAt: new Date('2023-10-20T15:22:00.000Z'),
+  },
+  {
+    _id: '2',
+    title: 'Best practices for API authentication',
+    tags: [
+      { _id: '3', name: 'api' },
+      { _id: '4', name: 'authentication' },
+    ],
+    author: {
+      _id: '3',
+      name: 'Bob Johnson',
+      picture: 'url_to_picture',
+    },
+    upvotes: 25,
+    views: 50,
+    answers: [],
+    createdAt: new Date('2022-03-20T09:45:00.000Z'),
+  },
+  {
+    _id: '3',
+    title: 'Optimizing performance in React applications',
+    tags: [
+      { _id: '1', name: 'react' },
+      { _id: '5', name: 'performance' },
+    ],
+    author: {
+      _id: '4',
+      name: 'Eva Brown',
+      picture: 'url_to_picture',
+    },
+    upvotes: 12,
+    views: 40,
+    answers: [],
+    createdAt: new Date('2022-05-10T16:15:00.000Z'),
+  },
+];
 
 export default function Home() {
   return (
@@ -33,6 +89,33 @@ export default function Home() {
       </div>
 
       <HomeFilters />
+
+      <div className='mt-10 flex w-full flex-col gap-6'>
+        {questions.length > 0 ? (
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
+        ) : (
+          <NoResult
+            title="There's no question to show"
+            description=' Be the first to break the silence! 🚀 Ask a Question and kickstart the
+          discussion. our query could be the next big thing others learn from. Get
+          involved! 💡'
+            link='/ask-question'
+            linkTitle='Ask a Question'
+          />
+        )}
+      </div>
     </>
   );
 }
