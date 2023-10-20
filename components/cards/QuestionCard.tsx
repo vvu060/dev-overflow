@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import RenderTag from '../shared/RenderTag';
+import Metric from '../shared/Metric';
 
 interface QuestionCardProps {
   _id: string;
@@ -46,6 +47,16 @@ const QuestionCard = ({
         {tags.map((tag) => (
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
+      </div>
+
+      <div className='flex-between mt-6 w-full flex-wrap gap-3'>
+        <Metric
+          imgUrl='/assets/icons/like.svg'
+          alt='upvotes'
+          value={upvotes}
+          title=' Votes'
+          textStyles='small-medium text-dark400_light800'
+        />
       </div>
     </div>
   );
