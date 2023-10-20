@@ -1,3 +1,4 @@
+import QuestionCard from '@/components/cards/QuestionCard';
 import HomeFilters from '@/components/home/HomeFilters';
 import Filter from '@/components/shared/Filter';
 import NoResult from '@/components/shared/NoResult';
@@ -92,7 +93,7 @@ export default function Home() {
 
       <div className='mt-10 flex w-full flex-col gap-6'>
         {questions.length > 0 ? (
-          questions.map((question) => 'No Question')
+          questions.map((question) => <QuestionCard />)
         ) : (
           <NoResult
             title="There's no question to show"
