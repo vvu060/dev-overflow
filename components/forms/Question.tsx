@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input';
 import { QuestionsSchema } from '@/lib/validations';
 import { Badge } from '../ui/badge';
 import Image from 'next/image';
+import { createQuestion } from '@/lib/actions/question.action';
 
 const type: any = 'create';
 
@@ -36,12 +37,14 @@ const Question = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof QuestionsSchema>) => {
+  const onSubmit = async (values: z.infer<typeof QuestionsSchema>) => {
     setIsSubmitting(true);
-
+    console.log({ values });
     try {
       // make async call to api to create a question
       // contain all form data
+
+      await createQuestion({});
       // navigate to home
     } catch (error) {
     } finally {
@@ -121,11 +124,12 @@ const Question = () => {
                 <span className='text-primary-500'>*</span>
               </FormLabel>
               <FormControl className='mt-3.5'>
-                {/* TODO: Add an editor */}
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   // @ts-ignore
                   onInit={(evt, editor) => (editorRef.current = editor)}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue=''
                   init={{
                     height: 350,
@@ -179,6 +183,7 @@ const Question = () => {
                     {...field}
                     className='no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border'
                     onKeyDown={(e) => handleInputKeyDown(e, field)}
+                    onChange={(e) => field.onChange(e.target.value)}
                   />
                   {field.value.length > 0 && (
                     <div className='flex-start mt-2.5 gap-2.5'>
